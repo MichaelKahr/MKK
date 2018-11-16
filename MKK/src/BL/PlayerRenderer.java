@@ -11,6 +11,7 @@ public class PlayerRenderer implements TableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Player p = (Player)value;
         JLabel label = new JLabel();
+        label.setOpaque(true);
         if(p==null) return label;
         
         switch(column){

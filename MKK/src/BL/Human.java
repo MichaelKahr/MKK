@@ -14,6 +14,9 @@ public class Human extends Player{
         if(rand.nextInt(2-1+1)==1){
             double dmg = this.getAttack();
             p.setHp((p.getHp()-(dmg-p.getDefense())));
+        }else{
+            double dmg = p.getAttack();
+            this.setHp((this.getHp()-(dmg-this.getDefense())));
         }
     }
 

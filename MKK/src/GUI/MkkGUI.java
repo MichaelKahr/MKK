@@ -1,16 +1,23 @@
 package GUI;
 
+import BL.PlayerModel;
+import BL.PlayerRenderer;
+
 /**
  *
  * @author mikeykahr
  */
 public class MkkGUI extends javax.swing.JFrame {
 
+    public static PlayerModel model = new PlayerModel();
     /**
      * Creates new form MkkGUI
      */
     public MkkGUI() {
         initComponents();
+        jtOut.setModel(model);
+        jtOut.setDefaultRenderer(Object.class, new PlayerRenderer());
+        jtOut.setShowGrid(true);
     }
 
     /**
@@ -22,12 +29,24 @@ public class MkkGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jmAddPlayer = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtOut = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         liOut = new javax.swing.JList<>();
 
+        jmAddPlayer.setText("Add Player");
+        jmAddPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAddPlayerActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jmAddPlayer);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jScrollPane1.setComponentPopupMenu(jPopupMenu1);
 
         jtOut.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -40,6 +59,7 @@ public class MkkGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtOut.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(jtOut);
 
         liOut.setModel(new javax.swing.AbstractListModel<String>() {
@@ -66,6 +86,14 @@ public class MkkGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmAddPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAddPlayerActionPerformed
+        MkkDlg dialog = new MkkDlg(this, true);
+        dialog.setVisible(true);
+        if(dialog.isOk()){
+            model.add(dialog.getP());
+        }
+    }//GEN-LAST:event_jmAddPlayerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,8 +131,10 @@ public class MkkGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem jmAddPlayer;
     private javax.swing.JTable jtOut;
     private javax.swing.JList<String> liOut;
     // End of variables declaration//GEN-END:variables
