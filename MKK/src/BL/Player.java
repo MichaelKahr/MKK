@@ -1,5 +1,7 @@
 package BL;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
 public abstract class Player {
@@ -23,6 +25,14 @@ public abstract class Player {
     
     public abstract void removeItem(Item i);
 
+//    private void writeObject(ObjectOutputStream oos) throws IOException{
+//        oos.defaultWriteObject();
+//        oos.writeUTF(this.getClass().getSimpleName());
+//        System.out.println(this.getClass().getSimpleName());
+//    }
+//    private void readObject()
+    
+    
     public double getAttack() {
         return attack;
     }

@@ -4,6 +4,7 @@ import BL.Item;
 import BL.Player;
 import BL.Human;
 import BL.Orc;
+import javax.swing.JOptionPane;
 /**
  *
  * @author mikeykahr
@@ -107,6 +108,9 @@ public class MkkDlg extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(tfName.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter a text!");
+        }else{
         if(cbType.getSelectedIndex()==0){
             p = new Human(tfName.getText());
         }
@@ -115,6 +119,7 @@ public class MkkDlg extends javax.swing.JDialog {
         }
         ok=true;
         this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -1,5 +1,6 @@
 package BL;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -13,6 +14,15 @@ public class PlayerRenderer implements TableCellRenderer{
         JLabel label = new JLabel();
         label.setOpaque(true);
         if(p==null) return label;
+        
+        if(p instanceof Orc){
+            label.setBackground(Color.lightGray);
+        }else{
+            label.setBackground(new Color(152,251,152));
+        }
+        if(isSelected){
+            label.setBackground(new Color(100,149,237));
+        }
         
         switch(column){
             case 0: label.setText(""+p.getName());break;
