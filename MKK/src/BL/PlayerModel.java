@@ -1,9 +1,11 @@
 package BL;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class PlayerModel extends AbstractTableModel{
     private LinkedList<Player> players = new LinkedList<>();
-    private String[]colNames = {"Name","Attack","Defense","HP"};
+    private String[]colNames = {"Type","Name","Attack","Defense","HP"};
 
     public void add(Player p){
         players.add(p);
@@ -47,12 +49,23 @@ public class PlayerModel extends AbstractTableModel{
         oos.flush();
         oos.close();
     }
-    public void load(File f) throws FileNotFoundException, IOException, ClassNotFoundException{
-        ObjectInputStream iis = new ObjectInputStream(new FileInputStream(f));
-        Player p;
-        while((p = (Player) iis.readObject())!=null){
-            add(p);
+    public void load(File f) {
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+            br.readLine();
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if(data[0].equals("Orc")){
+                    add(new Orc(""));
+                }
+                add(new Human(""));
+                fireTableDataChanged();
+            }
+
+        } catch (Exception e) {
+            
         }
+        System.out.println("test");
     }
 
 }

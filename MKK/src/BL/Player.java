@@ -1,8 +1,7 @@
 package BL;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.LinkedList;
+import javax.swing.ImageIcon;
 
 public abstract class Player {
     protected double attack;
@@ -10,12 +9,14 @@ public abstract class Player {
     protected double hp;
     protected String name;
     protected LinkedList<Item> items = new LinkedList<>();
+    protected static ImageIcon icon;
 
     public Player(String name,double attack, double defense, double hp) {
         this.name = name;
         this.attack = attack;
         this.defense = defense;
         this.hp = hp;
+        
         
     }
     

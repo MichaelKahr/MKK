@@ -3,7 +3,7 @@ package BL;
 public class Orc extends Player{
 
     public Orc(String name) {
-        super(name,30,60,180);
+        super(name,69.0,60.0,155.0);
     }
 
     @Override

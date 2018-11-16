@@ -5,7 +5,7 @@ import java.util.Random;
 public class Human extends Player{
     
     public Human(String name) {
-        super(name,60,40,150);
+        super(name,93.0,40.0,150.0);
     }
 
     @Override

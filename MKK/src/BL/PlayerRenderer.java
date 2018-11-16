@@ -20,15 +20,20 @@ public class PlayerRenderer implements TableCellRenderer{
         }else{
             label.setBackground(new Color(152,251,152));
         }
+        if(p.getHp()==0.0){
+            label.setBackground(Color.red);
+        }
         if(isSelected){
             label.setBackground(new Color(100,149,237));
         }
         
+        
         switch(column){
-            case 0: label.setText(""+p.getName());break;
-            case 1: label.setText(""+p.getAttack());break;
-            case 2: label.setText(""+p.getDefense());break;
-            case 3: label.setText(""+p.getHp());break;
+            case 0: label.setText(""+p.getClass().getSimpleName());break;
+            case 1: label.setText(""+p.getName());break;
+            case 2: label.setText(""+p.getAttack());break;
+            case 3: label.setText(""+p.getDefense());break;
+            case 4: label.setText(""+p.getHp());break;
         }
         
         return label;
