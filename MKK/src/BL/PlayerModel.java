@@ -21,6 +21,10 @@ public class PlayerModel extends AbstractTableModel{
         fireTableDataChanged();
     }
     
+    public void fight(Player p1,Player p2){
+        p1.fight(p2);
+        fireTableDataChanged();
+    }
     
     @Override
     public int getRowCount() {
@@ -30,6 +34,10 @@ public class PlayerModel extends AbstractTableModel{
     @Override
     public int getColumnCount() {
         return colNames.length;
+    }
+
+    public LinkedList<Player> getPlayers() {
+        return players;
     }
 
     @Override
