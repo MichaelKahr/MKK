@@ -3,6 +3,8 @@ package GUI;
 import BL.Item;
 import BL.PlayerModel;
 import BL.PlayerRenderer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -40,6 +42,7 @@ public class MkkGUI extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jmAddPlayer = new javax.swing.JMenuItem();
         jmAddItem = new javax.swing.JMenuItem();
+        jmDelete = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtOut = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -53,7 +56,7 @@ public class MkkGUI extends javax.swing.JFrame {
         });
         jPopupMenu1.add(jmFight);
 
-        jMenu1.setText("Add");
+        jMenu1.setText("Manage Players");
 
         jmAddPlayer.setText("Add Player");
         jmAddPlayer.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +73,14 @@ public class MkkGUI extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jmAddItem);
+
+        jmDelete.setText("Delete Selected Player");
+        jmDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmDeleteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmDelete);
 
         jPopupMenu1.add(jMenu1);
 
@@ -92,6 +103,9 @@ public class MkkGUI extends javax.swing.JFrame {
         jtOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtOutMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtOutMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jtOut);
@@ -129,21 +143,27 @@ public class MkkGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmAddPlayerActionPerformed
 
     private void jmFightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFightActionPerformed
-        if(selectedRows.length!=2){
+        int[]sel = jtOut.getSelectedRows();
+        if(sel.length!=2){
             JOptionPane.showMessageDialog(null, "Please select 2 Players!");
         }
         else{
-            model.fight(model.getPlayers().get(selectedRows[0]), model.getPlayers().get(selectedRows[1]));
+            try {
+                model.fight(model.getPlayers().get(sel[0]), model.getPlayers().get(sel[1]));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
         }
     }//GEN-LAST:event_jmFightActionPerformed
 
     private void jtOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtOutMouseClicked
         selectedRow = jtOut.getSelectedRow();
         selectedRows = jtOut.getSelectedRows();
+        taItems.setText("");
         for (Item i : model.getPlayers().get(selectedRow).getItems()) {
             taItems.append(i.toString()+"\n");
         }
-        System.out.println(model.getPlayers().get(selectedRow).getItems().toString());
+        //System.out.println(model.getPlayers().get(selectedRow).getItems().toString());
     }//GEN-LAST:event_jtOutMouseClicked
 
     private void jmAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAddItemActionPerformed
@@ -153,6 +173,14 @@ public class MkkGUI extends javax.swing.JFrame {
             model.getPlayers().get(selectedRow).addItem(dialog.getI());
         }
     }//GEN-LAST:event_jmAddItemActionPerformed
+
+    private void jtOutMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtOutMouseReleased
+        
+    }//GEN-LAST:event_jtOutMouseReleased
+
+    private void jmDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDeleteActionPerformed
+       model.delte(model.getPlayers().get(selectedRow));
+    }//GEN-LAST:event_jmDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +224,7 @@ public class MkkGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenuItem jmAddItem;
     private javax.swing.JMenuItem jmAddPlayer;
+    private javax.swing.JMenuItem jmDelete;
     private javax.swing.JMenuItem jmFight;
     private javax.swing.JTable jtOut;
     private javax.swing.JTextArea taItems;

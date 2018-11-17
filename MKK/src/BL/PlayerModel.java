@@ -20,8 +20,12 @@ public class PlayerModel extends AbstractTableModel{
         players.add(p);
         fireTableDataChanged();
     }
+    public void delte(Player p){
+        players.remove(p);
+        fireTableDataChanged();
+    }
     
-    public void fight(Player p1,Player p2){
+    public void fight(Player p1,Player p2) throws Exception{
         p1.fight(p2);
         fireTableDataChanged();
     }
