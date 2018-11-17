@@ -1,6 +1,7 @@
 package BL;
 
 public abstract class Item {
+
     private double deltaAttack;
     private double deltaDefense;
 
@@ -27,9 +28,7 @@ public abstract class Item {
 
     @Override
     public String toString() {
-        return String.format("%s (%.2f,%.2f)",this.getClass().getSimpleName(),this.deltaAttack,this.deltaDefense);
+        return String.format("%s (%.2f,%.2f)", this.getClass().getSimpleName(), this.deltaAttack, this.deltaDefense);
     }
-    
-    
-    
+
 }

@@ -18,6 +18,7 @@ public class MkkGUI extends javax.swing.JFrame {
     private final DefaultListModel lmodel = new DefaultListModel();
     private int selectedRow;
     private int[] selectedRows;
+
     /**
      * Creates new form MkkGUI
      */
@@ -137,17 +138,16 @@ public class MkkGUI extends javax.swing.JFrame {
     private void jmAddPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAddPlayerActionPerformed
         PlayerDlg dialog = new PlayerDlg(this, true);
         dialog.setVisible(true);
-        if(dialog.isOk()){
+        if (dialog.isOk()) {
             model.add(dialog.getP());
         }
     }//GEN-LAST:event_jmAddPlayerActionPerformed
 
     private void jmFightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFightActionPerformed
-        int[]sel = jtOut.getSelectedRows();
-        if(sel.length!=2){
+        int[] sel = jtOut.getSelectedRows();
+        if (sel.length != 2) {
             JOptionPane.showMessageDialog(null, "Please select 2 Players!");
-        }
-        else{
+        } else {
             try {
                 model.fight(model.getPlayers().get(sel[0]), model.getPlayers().get(sel[1]));
             } catch (Exception ex) {
@@ -161,7 +161,7 @@ public class MkkGUI extends javax.swing.JFrame {
         selectedRows = jtOut.getSelectedRows();
         taItems.setText("");
         for (Item i : model.getPlayers().get(selectedRow).getItems()) {
-            taItems.append(i.toString()+"\n");
+            taItems.append(i.toString() + "\n");
         }
         //System.out.println(model.getPlayers().get(selectedRow).getItems().toString());
     }//GEN-LAST:event_jtOutMouseClicked
@@ -169,17 +169,17 @@ public class MkkGUI extends javax.swing.JFrame {
     private void jmAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAddItemActionPerformed
         ItemDlg dialog = new ItemDlg(this, true);
         dialog.setVisible(true);
-        if(dialog.isOk()){
+        if (dialog.isOk()) {
             model.getPlayers().get(selectedRow).addItem(dialog.getI());
         }
     }//GEN-LAST:event_jmAddItemActionPerformed
 
     private void jtOutMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtOutMouseReleased
-        
+
     }//GEN-LAST:event_jtOutMouseReleased
 
     private void jmDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDeleteActionPerformed
-       model.delte(model.getPlayers().get(selectedRow));
+        model.delte(model.getPlayers().get(selectedRow));
     }//GEN-LAST:event_jmDeleteActionPerformed
 
     /**

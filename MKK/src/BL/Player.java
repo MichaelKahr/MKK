@@ -22,9 +22,9 @@ public abstract class Player {
 
     }
 
-    public void fight(Player p) throws Exception{
-        
-        if(this.getHp()==0.0||p.getHp()==0.0){
+    public void fight(Player p) throws Exception {
+
+        if (this.getHp() == 0.0 || p.getHp() == 0.0) {
             throw new Exception("One player is dead, you can't fight with them");
         }
         Random rand = new Random();

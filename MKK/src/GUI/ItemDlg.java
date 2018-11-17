@@ -14,6 +14,7 @@ public class ItemDlg extends javax.swing.JDialog {
 
     private Item i;
     private boolean ok;
+
     /**
      * Creates new form ItemDlg
      */
@@ -30,7 +31,6 @@ public class ItemDlg extends javax.swing.JDialog {
         return ok;
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,25 +124,23 @@ public class ItemDlg extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(tfAttack.getText().equals("")||tfDefense.getText().equals("")){
+        if (tfAttack.getText().equals("") || tfDefense.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter values!");
-        }else{
-            if(cbType.getSelectedIndex()==0){
-                i = new Sword(Double.parseDouble(tfAttack.getText()),Double.parseDouble(tfDefense.getText()));
+        } else {
+            if (cbType.getSelectedIndex() == 0) {
+                i = new Sword(Double.parseDouble(tfAttack.getText()), Double.parseDouble(tfDefense.getText()));
+            } else if (cbType.getSelectedIndex() == 1) {
+                i = new Axe(Double.parseDouble(tfAttack.getText()), Double.parseDouble(tfDefense.getText()));
+            } else {
+                i = new Shield(Double.parseDouble(tfAttack.getText()), Double.parseDouble(tfDefense.getText()));
             }
-            else if(cbType.getSelectedIndex()==1){
-                i = new Axe(Double.parseDouble(tfAttack.getText()),Double.parseDouble(tfDefense.getText()));
-            }
-            else{
-                i = new Shield(Double.parseDouble(tfAttack.getText()),Double.parseDouble(tfDefense.getText()));
-            }
-            ok=true;
+            ok = true;
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ok=false;
+        ok = false;
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -5,13 +5,14 @@ import BL.Player;
 import BL.Human;
 import BL.Orc;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author mikeykahr
  */
 public class PlayerDlg extends javax.swing.JDialog {
 
-    private boolean ok=false;
+    private boolean ok = false;
     private Player p;
 
     public boolean isOk() {
@@ -21,8 +22,7 @@ public class PlayerDlg extends javax.swing.JDialog {
     public Player getP() {
         return p;
     }
-    
-    
+
     /**
      * Creates new form MkkDlg
      */
@@ -108,22 +108,21 @@ public class PlayerDlg extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(tfName.getText().equals("")){
+        if (tfName.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter a text!");
-        }else{
-        if(cbType.getSelectedIndex()==0){
-            p = new Human(tfName.getText());
-        }
-        else{
-            p = new Orc(tfName.getText());
-        }
-        ok=true;
-        this.dispose();
+        } else {
+            if (cbType.getSelectedIndex() == 0) {
+                p = new Human(tfName.getText());
+            } else {
+                p = new Orc(tfName.getText());
+            }
+            ok = true;
+            this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ok=false;
+        ok = false;
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
