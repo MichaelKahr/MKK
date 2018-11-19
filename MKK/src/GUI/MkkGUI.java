@@ -3,9 +3,8 @@ package GUI;
 import BL.Item;
 import BL.PlayerModel;
 import BL.PlayerRenderer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +26,7 @@ public class MkkGUI extends javax.swing.JFrame {
         jtOut.setModel(model);
         jtOut.setDefaultRenderer(Object.class, new PlayerRenderer());
         jtOut.setShowGrid(true);
+        liOut.setModel(lmodel);
     }
 
     /**
@@ -38,16 +38,19 @@ public class MkkGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPTable = new javax.swing.JPopupMenu();
         jmFight = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jmAddPlayer = new javax.swing.JMenuItem();
         jmAddItem = new javax.swing.JMenuItem();
         jmDelete = new javax.swing.JMenuItem();
+        jPList = new javax.swing.JPopupMenu();
+        jmAdd = new javax.swing.JMenuItem();
+        jmRemove = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtOut = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        taItems = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        liOut = new javax.swing.JList<>();
 
         jmFight.setText("Fight");
         jmFight.addActionListener(new java.awt.event.ActionListener() {
@@ -55,7 +58,7 @@ public class MkkGUI extends javax.swing.JFrame {
                 jmFightActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(jmFight);
+        jPTable.add(jmFight);
 
         jMenu1.setText("Manage Players");
 
@@ -83,11 +86,27 @@ public class MkkGUI extends javax.swing.JFrame {
         });
         jMenu1.add(jmDelete);
 
-        jPopupMenu1.add(jMenu1);
+        jPTable.add(jMenu1);
+
+        jmAdd.setText("Add Item");
+        jmAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAddActionPerformed(evt);
+            }
+        });
+        jPList.add(jmAdd);
+
+        jmRemove.setText("Remove Item");
+        jmRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRemoveActionPerformed(evt);
+            }
+        });
+        jPList.add(jmRemove);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setComponentPopupMenu(jPopupMenu1);
+        jScrollPane1.setComponentPopupMenu(jPTable);
 
         jtOut.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,7 +119,9 @@ public class MkkGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtOut.setComponentPopupMenu(jPopupMenu1);
+        jtOut.setComponentPopupMenu(jPTable);
+        jtOut.getTableHeader().setResizingAllowed(false);
+        jtOut.getTableHeader().setReorderingAllowed(false);
         jtOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtOutMouseClicked(evt);
@@ -111,9 +132,13 @@ public class MkkGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtOut);
 
-        taItems.setColumns(20);
-        taItems.setRows(5);
-        jScrollPane3.setViewportView(taItems);
+        liOut.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        liOut.setComponentPopupMenu(jPList);
+        jScrollPane2.setViewportView(liOut);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,15 +146,13 @@ public class MkkGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3))
+            .addComponent(jScrollPane2)
         );
 
         pack();
@@ -159,11 +182,15 @@ public class MkkGUI extends javax.swing.JFrame {
     private void jtOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtOutMouseClicked
         selectedRow = jtOut.getSelectedRow();
         selectedRows = jtOut.getSelectedRows();
-        taItems.setText("");
+        lmodel.clear();
         for (Item i : model.getPlayers().get(selectedRow).getItems()) {
-            taItems.append(i.toString() + "\n");
+            lmodel.addElement(i);
         }
-        //System.out.println(model.getPlayers().get(selectedRow).getItems().toString());
+//        taItems.setText("");
+//        for (Item i : model.getPlayers().get(selectedRow).getItems()) {
+//            taItems.append(i.toString() + "\n");
+//        }
+
     }//GEN-LAST:event_jtOutMouseClicked
 
     private void jmAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAddItemActionPerformed
@@ -179,8 +206,21 @@ public class MkkGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jtOutMouseReleased
 
     private void jmDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDeleteActionPerformed
-        model.delte(model.getPlayers().get(selectedRow));
+        model.delete(model.getPlayers().get(selectedRow));
     }//GEN-LAST:event_jmDeleteActionPerformed
+
+    private void jmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAddActionPerformed
+        ItemDlg dialog = new ItemDlg(this, true);
+        dialog.setVisible(true);
+        if (dialog.isOk()) {
+            model.getPlayers().get(selectedRow).addItem(dialog.getI());
+        }
+    }//GEN-LAST:event_jmAddActionPerformed
+
+    private void jmRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRemoveActionPerformed
+        model.getPlayers().get(selectedRow).removeItem(model.getPlayers().get(selectedRow).getItems().get(liOut.getSelectedIndex()));
+        liOut = new JList(lmodel);
+    }//GEN-LAST:event_jmRemoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,14 +259,17 @@ public class MkkGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPList;
+    private javax.swing.JPopupMenu jPTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem jmAdd;
     private javax.swing.JMenuItem jmAddItem;
     private javax.swing.JMenuItem jmAddPlayer;
     private javax.swing.JMenuItem jmDelete;
     private javax.swing.JMenuItem jmFight;
+    private javax.swing.JMenuItem jmRemove;
     private javax.swing.JTable jtOut;
-    private javax.swing.JTextArea taItems;
+    private javax.swing.JList<String> liOut;
     // End of variables declaration//GEN-END:variables
 }

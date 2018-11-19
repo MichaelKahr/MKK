@@ -20,7 +20,7 @@ public class PlayerModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void delte(Player p) {
+    public void delete(Player p) {
         players.remove(p);
         fireTableDataChanged();
     }
