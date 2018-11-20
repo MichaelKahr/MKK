@@ -1,5 +1,6 @@
 package BL;
 
+import Player.Human;
 import Player.Orc;
 import Player.Player;
 import java.awt.Color;
@@ -33,7 +34,12 @@ public class PlayerRenderer implements TableCellRenderer {
 
         switch (column) {
             case 0:
-                label.setText("" + p.getClass().getSimpleName());
+                if(p instanceof Human){
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/Human.jpg")));
+                }
+                else if(p instanceof Orc){
+                    label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/Orc.png")));
+                }
                 break;
             case 1:
                 label.setText("" + p.getName());

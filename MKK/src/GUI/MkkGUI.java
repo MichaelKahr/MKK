@@ -3,8 +3,11 @@ package GUI;
 import Items.Item;
 import BL.PlayerModel;
 import BL.PlayerRenderer;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,16 +20,18 @@ public class MkkGUI extends javax.swing.JFrame {
     private final DefaultListModel lmodel = new DefaultListModel();
     private int selectedRow;
     private int[] selectedRows;
+    private File f = new File("data.mkk");
 
     /**
      * Creates new form MkkGUI
      */
-    public MkkGUI() {
+    public MkkGUI() throws Exception {
         initComponents();
         jtOut.setModel(model);
         jtOut.setDefaultRenderer(Object.class, new PlayerRenderer());
         jtOut.setShowGrid(true);
         liOut.setModel(lmodel);
+        model.load(f);
     }
 
     /**
@@ -105,6 +110,11 @@ public class MkkGUI extends javax.swing.JFrame {
         jPList.add(jmRemove);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jScrollPane1.setComponentPopupMenu(jPTable);
 
@@ -125,9 +135,6 @@ public class MkkGUI extends javax.swing.JFrame {
         jtOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtOutMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jtOutMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jtOut);
@@ -196,10 +203,6 @@ public class MkkGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmAddItemActionPerformed
 
-    private void jtOutMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtOutMouseReleased
-
-    }//GEN-LAST:event_jtOutMouseReleased
-
     private void jmDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDeleteActionPerformed
         model.delete(model.getPlayers().get(selectedRow));
     }//GEN-LAST:event_jmDeleteActionPerformed
@@ -214,8 +217,21 @@ public class MkkGUI extends javax.swing.JFrame {
 
     private void jmRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRemoveActionPerformed
         model.getPlayers().get(selectedRow).removeItem(model.getPlayers().get(selectedRow).getItems().get(liOut.getSelectedIndex()));
-        liOut = new JList(lmodel);
+        try{
+        jtOutMouseClicked(null);
+        }
+        catch(NullPointerException ex){
+            
+        }
     }//GEN-LAST:event_jmRemoveActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            model.save(f);
+        } catch (IOException ex) {
+            Logger.getLogger(MkkGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -247,7 +263,11 @@ public class MkkGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MkkGUI().setVisible(true);
+                try {
+                    new MkkGUI().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(MkkGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

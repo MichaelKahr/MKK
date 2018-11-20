@@ -1,6 +1,8 @@
 package Items;
 
-public abstract class Item {
+import java.io.Serializable;
+
+public abstract class Item implements Serializable{
 
     private double deltaAttack;
     private double deltaDefense;

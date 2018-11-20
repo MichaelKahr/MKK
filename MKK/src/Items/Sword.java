@@ -1,6 +1,8 @@
 package Items;
 
-public class Sword extends Item {
+import java.io.Serializable;
+
+public class Sword extends Item implements Serializable{
 
     public Sword(double deltaAttack, double deltaDefense) {
         super(deltaAttack, deltaDefense);

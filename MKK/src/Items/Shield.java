@@ -1,6 +1,8 @@
 package Items;
 
-public class Shield extends Item {
+import java.io.Serializable;
+
+public class Shield extends Item implements Serializable{
 
     public Shield(double deltaAttack, double deltaDefense) {
         super(deltaAttack, deltaDefense);

@@ -1,16 +1,16 @@
 package BL;
 
-import Player.Orc;
 import Player.Player;
-import Player.Human;
-import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
+import javax.swing.RowFilter.Entry;
 import javax.swing.table.AbstractTableModel;
 
 public class PlayerModel extends AbstractTableModel {
@@ -60,29 +60,23 @@ public class PlayerModel extends AbstractTableModel {
     public void save(File f) throws FileNotFoundException, IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
         for (Player player : players) {
-            oos.writeObject(oos);
+            oos.writeObject(player);
         }
         oos.flush();
         oos.close();
     }
 
-    public void load(File f) {
-        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-            br.readLine();
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data[0].equals("Orc")) {
-                    add(new Orc(""));
-                }
-                add(new Human(""));
-                fireTableDataChanged();
+    public void load(File f) throws Exception {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+        try {
+            Player p;
+            while ((p = (Player) ois.readObject()) != null) {
+                add(p);
             }
-
-        } catch (Exception e) {
+        } catch (EOFException eof) {
 
         }
-        System.out.println("test");
+
     }
 
 }

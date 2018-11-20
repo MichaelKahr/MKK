@@ -2,18 +2,17 @@ package Player;
 
 import Items.Item;
 import GUI.MkkGUI;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Random;
-import javax.swing.ImageIcon;
 
-public abstract class Player {
+public abstract class Player implements Serializable{
 
     protected double attack;
     protected double defense;
     protected double hp;
     protected String name;
     protected LinkedList<Item> items = new LinkedList<>();
-    protected static ImageIcon icon;
 
     public Player(String name, double attack, double defense, double hp) {
         this.name = name;
