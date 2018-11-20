@@ -45,10 +45,16 @@ public class MkkGUI extends javax.swing.JFrame {
 
         jPTable = new javax.swing.JPopupMenu();
         jmFight = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        Player = new javax.swing.JMenu();
         jmAddPlayer = new javax.swing.JMenuItem();
         jmAddItem = new javax.swing.JMenuItem();
         jmDelete = new javax.swing.JMenuItem();
+        Sort = new javax.swing.JMenu();
+        jmSortName = new javax.swing.JMenuItem();
+        jmSortAttack = new javax.swing.JMenuItem();
+        jmSortDefense = new javax.swing.JMenuItem();
+        jmSortHP = new javax.swing.JMenuItem();
+        jmSortAmountItems = new javax.swing.JMenuItem();
         jPList = new javax.swing.JPopupMenu();
         jmAdd = new javax.swing.JMenuItem();
         jmRemove = new javax.swing.JMenuItem();
@@ -65,7 +71,7 @@ public class MkkGUI extends javax.swing.JFrame {
         });
         jPTable.add(jmFight);
 
-        jMenu1.setText("Manage Players");
+        Player.setText("Manage Players");
 
         jmAddPlayer.setText("Add Player");
         jmAddPlayer.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +79,7 @@ public class MkkGUI extends javax.swing.JFrame {
                 jmAddPlayerActionPerformed(evt);
             }
         });
-        jMenu1.add(jmAddPlayer);
+        Player.add(jmAddPlayer);
 
         jmAddItem.setText("Add item");
         jmAddItem.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +87,7 @@ public class MkkGUI extends javax.swing.JFrame {
                 jmAddItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jmAddItem);
+        Player.add(jmAddItem);
 
         jmDelete.setText("Delete Selected Player");
         jmDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -89,9 +95,53 @@ public class MkkGUI extends javax.swing.JFrame {
                 jmDeleteActionPerformed(evt);
             }
         });
-        jMenu1.add(jmDelete);
+        Player.add(jmDelete);
 
-        jPTable.add(jMenu1);
+        jPTable.add(Player);
+
+        Sort.setText("Sort");
+
+        jmSortName.setText("Name");
+        jmSortName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSortNameActionPerformed(evt);
+            }
+        });
+        Sort.add(jmSortName);
+
+        jmSortAttack.setText("Attack");
+        jmSortAttack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSortAttackActionPerformed(evt);
+            }
+        });
+        Sort.add(jmSortAttack);
+
+        jmSortDefense.setText("Defense");
+        jmSortDefense.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSortDefenseActionPerformed(evt);
+            }
+        });
+        Sort.add(jmSortDefense);
+
+        jmSortHP.setText("HP");
+        jmSortHP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSortHPActionPerformed(evt);
+            }
+        });
+        Sort.add(jmSortHP);
+
+        jmSortAmountItems.setText("Amount of Items");
+        jmSortAmountItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSortAmountItemsActionPerformed(evt);
+            }
+        });
+        Sort.add(jmSortAmountItems);
+
+        jPTable.add(Sort);
 
         jmAdd.setText("Add Item");
         jmAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -190,8 +240,13 @@ public class MkkGUI extends javax.swing.JFrame {
         selectedRow = jtOut.getSelectedRow();
         selectedRows = jtOut.getSelectedRows();
         lmodel.clear();
+        try{
         for (Item i : model.getPlayers().get(selectedRow).getItems()) {
             lmodel.addElement(i);
+        }
+        }
+        catch(IndexOutOfBoundsException ix){
+            
         }
     }//GEN-LAST:event_jtOutMouseClicked
 
@@ -233,6 +288,26 @@ public class MkkGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void jmSortNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSortNameActionPerformed
+        model.SortByName();
+    }//GEN-LAST:event_jmSortNameActionPerformed
+
+    private void jmSortAttackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSortAttackActionPerformed
+        model.SortByAttack();
+    }//GEN-LAST:event_jmSortAttackActionPerformed
+
+    private void jmSortDefenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSortDefenseActionPerformed
+        model.SortByDefense();
+    }//GEN-LAST:event_jmSortDefenseActionPerformed
+
+    private void jmSortHPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSortHPActionPerformed
+        model.SortByHP();
+    }//GEN-LAST:event_jmSortHPActionPerformed
+
+    private void jmSortAmountItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSortAmountItemsActionPerformed
+        model.SortByItemAmount();
+    }//GEN-LAST:event_jmSortAmountItemsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,7 +348,8 @@ public class MkkGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu Player;
+    private javax.swing.JMenu Sort;
     private javax.swing.JPopupMenu jPList;
     private javax.swing.JPopupMenu jPTable;
     private javax.swing.JScrollPane jScrollPane1;
@@ -284,6 +360,11 @@ public class MkkGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmDelete;
     private javax.swing.JMenuItem jmFight;
     private javax.swing.JMenuItem jmRemove;
+    private javax.swing.JMenuItem jmSortAmountItems;
+    private javax.swing.JMenuItem jmSortAttack;
+    private javax.swing.JMenuItem jmSortDefense;
+    private javax.swing.JMenuItem jmSortHP;
+    private javax.swing.JMenuItem jmSortName;
     private javax.swing.JTable jtOut;
     private javax.swing.JList<String> liOut;
     // End of variables declaration//GEN-END:variables

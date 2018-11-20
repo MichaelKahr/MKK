@@ -1,6 +1,11 @@
 package BL;
 
 import Player.Player;
+import Sort.SortByName;
+import Sort.SortByAttack;
+import Sort.SortByDefense;
+import Sort.SortByHP;
+import Sort.SortByItemAmount;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,8 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collections;
 import java.util.LinkedList;
-import javax.swing.RowFilter.Entry;
 import javax.swing.table.AbstractTableModel;
 
 public class PlayerModel extends AbstractTableModel {
@@ -76,7 +81,27 @@ public class PlayerModel extends AbstractTableModel {
         } catch (EOFException eof) {
 
         }
-
+    }
+    
+    public void SortByName(){
+        Collections.sort(players, new SortByName());
+        fireTableDataChanged();
+    }
+    public void SortByItemAmount(){
+        Collections.sort(players, new SortByItemAmount());
+        fireTableDataChanged();
+    }
+    public void SortByHP(){
+        Collections.sort(players,new SortByHP());
+        fireTableDataChanged();
+    }
+    public void SortByAttack(){
+        Collections.sort(players, new SortByAttack());
+        fireTableDataChanged();
+    }
+    public void SortByDefense(){
+        Collections.sort(players, new SortByDefense());
+        fireTableDataChanged();
     }
 
 }
