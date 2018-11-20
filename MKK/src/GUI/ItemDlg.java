@@ -1,9 +1,9 @@
 package GUI;
 
-import BL.Axe;
-import BL.Item;
-import BL.Shield;
-import BL.Sword;
+import Items.Axe;
+import Items.Item;
+import Items.Shield;
+import Items.Sword;
 import javax.swing.JOptionPane;
 
 /**

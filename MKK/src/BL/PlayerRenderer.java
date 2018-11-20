@@ -1,5 +1,7 @@
 package BL;
 
+import Player.Orc;
+import Player.Player;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;

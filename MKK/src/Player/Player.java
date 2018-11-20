@@ -1,5 +1,6 @@
-package BL;
+package Player;
 
+import Items.Item;
 import GUI.MkkGUI;
 import java.util.LinkedList;
 import java.util.Random;

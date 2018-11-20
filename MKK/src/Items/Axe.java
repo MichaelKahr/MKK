@@ -1,4 +1,4 @@
-package BL;
+package Items;
 
 public class Axe extends Item {
 

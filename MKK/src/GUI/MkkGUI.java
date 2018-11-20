@@ -1,6 +1,6 @@
 package GUI;
 
-import BL.Item;
+import Items.Item;
 import BL.PlayerModel;
 import BL.PlayerRenderer;
 import javax.swing.DefaultListModel;
@@ -186,11 +186,6 @@ public class MkkGUI extends javax.swing.JFrame {
         for (Item i : model.getPlayers().get(selectedRow).getItems()) {
             lmodel.addElement(i);
         }
-//        taItems.setText("");
-//        for (Item i : model.getPlayers().get(selectedRow).getItems()) {
-//            taItems.append(i.toString() + "\n");
-//        }
-
     }//GEN-LAST:event_jtOutMouseClicked
 
     private void jmAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAddItemActionPerformed

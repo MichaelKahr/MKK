@@ -1,5 +1,6 @@
-package BL;
+package Player;
 
+import Player.Player;
 import java.util.Random;
 
 public class Orc extends Player {

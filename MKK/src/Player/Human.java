@@ -1,4 +1,4 @@
-package BL;
+package Player;
 
 import java.util.Random;
 

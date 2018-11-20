@@ -1,9 +1,9 @@
 package GUI;
 
-import BL.Item;
-import BL.Player;
-import BL.Human;
-import BL.Orc;
+import Items.Item;
+import Player.Player;
+import Player.Human;
+import Player.Orc;
 import javax.swing.JOptionPane;
 
 /**

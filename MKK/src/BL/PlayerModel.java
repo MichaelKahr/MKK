@@ -1,5 +1,8 @@
 package BL;
 
+import Player.Orc;
+import Player.Player;
+import Player.Human;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

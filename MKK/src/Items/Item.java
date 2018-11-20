@@ -1,4 +1,4 @@
-package BL;
+package Items;
 
 public abstract class Item {
 
